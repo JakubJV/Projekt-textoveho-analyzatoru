@@ -1,5 +1,6 @@
 from pprint import pprint
 
+
 """
 projekt_1.py: první projekt do Engeto Online Python Akademie
 author: Jakub Vondra
@@ -162,22 +163,28 @@ for slovo in vyskyt_slov:
 print(f"Součet všech čísel v textu je {soucet}.")
 print(oddelovac)
 
-frekvence_slov = sorted(list(vyskyt_slov.values()))
 
-word_freq = []
+# 6. Četnost různých délek slov v textu
+letters_length = []
+count_length = {}
 
-for slovo in vyskyt_slov.keys():
-    pocet_vyskytu = vyskyt_slov[slovo]
-    if pocet_vyskytu in frekvence_slov:
-        word_freq.append((pocet_vyskytu, slovo))
+for letter_len in vycistena_slova:
+    letters_length.append(len(letter_len))
+
+for length in letters_length:
+    if length not in count_length:
+        count_length[length] = 1
+    else:
+        count_length[length] += 1
 
 
-word_freq = sorted(word_freq)
+# vypsání hlavičky tabulky
+print("+-------+-------------------+--------------+")
+print("| DÉLKA |      PŘÍPADY      | PŘÍPADY [ks] |")
+print("+-------+-------------------+--------------+")
 
+# vypsání těla tabulky
+for key, value in (sorted(count_length.items())):
+    print(f"|{key:>7}|{'*' * value:<19}|{value:<14}|")
 
-for index, pocet_a_slovo in enumerate(word_freq, 1):
-    print(oddelovac,
-          f"{index}|{pocet_a_slovo[1]:^12}|{pocet_a_slovo[0]}x|",
-          sep="\n")
-else:
-    print(oddelovac)
+print("+-------+-------------------+--------------+")
